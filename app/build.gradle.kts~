@@ -24,7 +24,7 @@ android {
         }
 
         // API Key'i local.properties'den oku
-        val localProperties = Properties()
+        val localProperties = java.util.Properties()
         val localPropertiesFile = rootProject.file("local.properties")
         if (localPropertiesFile.exists()) {
             localPropertiesFile.inputStream().use { localProperties.load(it) }
