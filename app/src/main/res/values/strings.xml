@@ -1,0 +1,12 @@
+<!-- app/src/main/res/values/strings.xml -->
+<resources>
+    <string name="app_name">OnnWay</string>
+    <string name="app_title">OnnWay</string>
+    <string name="app_subtitle">Create optimized tourism routes for Istanbul and Tallinn</string>
+    <string name="greeting_tallinn">🇪🇪 Tere!</string>
+    <string name="greeting_istanbul">Merhaba! 🇹🇷</string>
+    <string name="footer_text">Built with Kotlin and Jetpack Compose</string>
+    <string name="location_permission_required">Location permission is required to create routes</string>
+    <string name="getting_location">Getting your location...</string>
+    <string name="location_error">Unable to get location. Please enable location services.</string>
+</resources>
