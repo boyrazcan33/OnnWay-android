@@ -1,0 +1,8 @@
+﻿
+10-19 14:53:05.914  2063  2063 I Choreographer: Skipped 103 frames!  The application may be doing too much work on its main thread.
+10-19 14:53:06.540  6117  6117 I Choreographer: Skipped 119 frames!  The application may be doing too much work on its main thread.
+10-19 14:53:09.310  6117  6117 I Choreographer: Skipped 137 frames!  The application may be doing too much work on its main thread.
+10-19 14:53:09.896  6117  6117 I Choreographer: Skipped 33 frames!  The application may be doing too much work on its main thread.
+10-19 14:53:49.601  6117  6117 I Choreographer: Skipped 127 frames!  The application may be doing too much work on its main thread.
+
+

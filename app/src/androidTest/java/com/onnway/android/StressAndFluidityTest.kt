@@ -1,5 +1,6 @@
 package com.onnway.android
 
+import android.os.Debug
 import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,10 +18,22 @@ class StressAndFluidityTest {
     private lateinit var device: UiDevice
 
     companion object {
-        private const val TOTAL_CYCLES = 5
+        private const val TOTAL_CYCLES = 1  // ← 5'ten 1'e değişti (senin isteğin)
         private const val SCROLL_DURATION_SEC = 30
         private const val ZOOM_DURATION_SEC = 30
         private const val PACKAGE_NAME = "com.onnway.android"
+    }
+
+    // ⬇️ SADECE BU FONKSİYON EKLENDİ ⬇️
+    private fun logMemory(tag: String) {
+        try {
+            val memInfo = Debug.MemoryInfo()
+            Debug.getMemoryInfo(memInfo)
+            val pssMB = memInfo.totalPss / 1024.0
+            Log.d("MEMORY_TEST", "$tag: ${String.format("%.2f", pssMB)} MB")
+        } catch (e: Exception) {
+            Log.e("MEMORY_TEST", "Failed to get memory: ${e.message}")
+        }
     }
 
     @Before
@@ -61,6 +74,8 @@ class StressAndFluidityTest {
 
         val startTime = System.currentTimeMillis()
 
+        logMemory("START")  // ← SADECE BU EKLENDİ
+
         // Initial setup
         if (!setupRouteParameters()) {
             Log.e("ANIMATION_TEST", "Setup failed, aborting")
@@ -78,11 +93,17 @@ class StressAndFluidityTest {
                 // Step 2: Wait for animation to complete
                 waitForAnimation(cycle)
 
+                logMemory("CYCLE_${cycle}_AFTER_ROUTE")  // ← SADECE BU EKLENDİ
+
                 // Step 3: Scroll test (30 seconds)
                 scrollTest(cycle)
 
+                logMemory("CYCLE_${cycle}_AFTER_SCROLL")  // ← SADECE BU EKLENDİ
+
                 // Step 4: Map zoom test (30 seconds)
                 mapZoomTest(cycle)
+
+                logMemory("CYCLE_${cycle}_AFTER_ZOOM")  // ← SADECE BU EKLENDİ
 
                 // Step 5: Go back and prepare for next cycle
                 if (cycle < TOTAL_CYCLES) {
@@ -93,6 +114,8 @@ class StressAndFluidityTest {
                 Log.e("ANIMATION_TEST", "Cycle $cycle failed: ${e.message}")
             }
         }
+
+        logMemory("END")  // ← SADECE BU EKLENDİ
 
         val totalTime = (System.currentTimeMillis() - startTime) / 1000 / 60
         Log.d("ANIMATION_TEST", "")
@@ -162,7 +185,6 @@ class StressAndFluidityTest {
     private fun createRoute(cycle: Int) {
         Log.d("ANIMATION_TEST", "[$cycle] Creating route...")
 
-        // CREATE MY ROUTE butonunu bulana kadar scroll yap
         var scrollCount = 0
         var buttonFound = false
 
@@ -171,7 +193,6 @@ class StressAndFluidityTest {
             Thread.sleep(500)
             scrollCount++
 
-            // Her 2 scroll'da bir kontrol et
             if (scrollCount % 2 == 0) {
                 val createButton = device.findObject(By.text("CREATE MY ROUTE"))
                 if (createButton != null) {
@@ -194,15 +215,14 @@ class StressAndFluidityTest {
 
         val animationStartTime = System.currentTimeMillis()
         var waitCount = 0
-        val maxWait = 120 // 120 seconds max wait
+        val maxWait = 120
 
-        // Wait for loading to disappear
         while (waitCount < maxWait) {
             val loading = device.findObject(UiSelector().textContains("Teaching the map"))
             if (!loading.exists()) {
                 val animationDuration = (System.currentTimeMillis() - animationStartTime) / 1000
                 Log.d("ANIMATION_TEST", "[$cycle] ✓ Animation completed in ${animationDuration}s")
-                Thread.sleep(3000) // Extra wait to ensure route is fully loaded
+                Thread.sleep(3000)
                 return
             }
             Thread.sleep(1000)
@@ -220,12 +240,10 @@ class StressAndFluidityTest {
         var scrollCount = 0
 
         while (System.currentTimeMillis() < scrollEndTime) {
-            // Scroll down
             scrollDown()
             Thread.sleep(150)
             scrollCount++
 
-            // Scroll up
             scrollUp()
             Thread.sleep(150)
             scrollCount++
@@ -242,16 +260,14 @@ class StressAndFluidityTest {
     private fun mapZoomTest(cycle: Int) {
         Log.d("ANIMATION_TEST", "[$cycle] Scrolling up to find map...")
 
-        // Map EN YUKARIDA - YUKARI scroll ile ara
         var scrollCount = 0
         var mapFound = false
 
         while (scrollCount < 30 && !mapFound) {
-            scrollUp()  // YUKARI scroll (map yukarıda)
+            scrollUp()
             Thread.sleep(300)
             scrollCount++
 
-            // Her 3 scroll'da bir kontrol et
             if (scrollCount % 3 == 0) {
                 val mapText = device.findObject(By.textContains("Route Map"))
                 if (mapText != null) {
@@ -274,12 +290,10 @@ class StressAndFluidityTest {
         var zoomCount = 0
 
         while (System.currentTimeMillis() < zoomEndTime) {
-            // Zoom in
             zoomIn()
             Thread.sleep(300)
             zoomCount++
 
-            // Zoom out
             zoomOut()
             Thread.sleep(300)
             zoomCount++
@@ -296,16 +310,14 @@ class StressAndFluidityTest {
     private fun prepareNextCycle(cycle: Int) {
         Log.d("ANIMATION_TEST", "[$cycle] Preparing for next cycle...")
 
-        // Create New Route EN AŞAĞIDA - AŞAĞI scroll ile ara
         var scrollCount = 0
         var buttonFound = false
 
         while (scrollCount < 30 && !buttonFound) {
-            scrollDown()  // AŞAĞI scroll (button aşağıda)
+            scrollDown()
             Thread.sleep(300)
             scrollCount++
 
-            // Her 3 scroll'da bir kontrol et
             if (scrollCount % 3 == 0) {
                 val newRouteButton = device.findObject(By.text("Create New Route"))
                 if (newRouteButton != null) {
@@ -326,14 +338,13 @@ class StressAndFluidityTest {
 
     private fun reSelectParameters() {
         try {
-            Thread.sleep(4000)  // 2 saniye → 4 saniye (daha fazla bekle)
+            Thread.sleep(4000)
 
             Log.d("ANIMATION_TEST", "Searching for Tallinn...")
 
-            // Tallinn'i bekleyerek ara
             val tallinn = device.wait(
                 Until.findObject(By.text("🇪🇪 Tallinn")),
-                10000L  // 10 saniye bekle
+                10000L
             )
 
             if (tallinn != null) {
@@ -346,7 +357,6 @@ class StressAndFluidityTest {
                 return
             }
 
-            // Social Media Spots
             scrollDown()
             val socialMedia = device.wait(
                 Until.findObject(By.text("Social Media Spots")),
@@ -355,7 +365,6 @@ class StressAndFluidityTest {
             socialMedia?.click()
             Thread.sleep(2000)
 
-            // Mid Range
             scrollDown()
             val midRange = device.wait(
                 Until.findObject(By.text("Mid Range")),
@@ -364,7 +373,6 @@ class StressAndFluidityTest {
             midRange?.click()
             Thread.sleep(2000)
 
-            // Medium
             scrollDown()
             val medium = device.wait(
                 Until.findObject(By.text("Medium (1 day)")),

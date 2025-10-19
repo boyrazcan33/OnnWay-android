@@ -1,0 +1,38 @@
+﻿
+10-19 14:53:13.321  6117  6135 D ANIMATION_TEST: Permission granted
+10-19 14:53:16.322  6117  6135 D ANIMATION_TEST: ========================================
+10-19 14:53:16.322  6117  6135 D ANIMATION_TEST: ANIMATION FLUIDITY TEST STARTED
+10-19 14:53:16.322  6117  6135 D ANIMATION_TEST: Total Cycles: 1
+10-19 14:53:16.322  6117  6135 D ANIMATION_TEST: ========================================
+10-19 14:53:18.357  6117  6135 D ANIMATION_TEST: Setting up route parameters...
+10-19 14:53:20.940  6117  6135 D ANIMATION_TEST: Ô£ô Tallinn selected
+10-19 14:53:22.337  6117  6135 D ANIMATION_TEST: Ô£ô Social Media Spots selected
+10-19 14:53:23.395  6117  6135 D ANIMATION_TEST: Ô£ô Mid Range selected
+10-19 14:53:24.824  6117  6135 D ANIMATION_TEST: Ô£ô Medium duration selected
+10-19 14:53:24.825  6117  6135 D ANIMATION_TEST: 
+10-19 14:53:24.825  6117  6135 D ANIMATION_TEST: ========== CYCLE 1/1 ==========
+10-19 14:53:24.825  6117  6135 D ANIMATION_TEST: [1] Creating route...
+10-19 14:53:26.685  6117  6135 D ANIMATION_TEST: [1] Ô£ô CREATE button found after 2 scrolls
+10-19 14:53:28.788  6117  6135 D ANIMATION_TEST: [1] Waiting for animation to complete...
+10-19 14:53:30.038  6117  6135 D ANIMATION_TEST: [1] Ô£ô Animation completed in 1s
+10-19 14:53:33.098  6117  6135 D ANIMATION_TEST: [1] Starting scroll test (30s)...
+10-19 14:53:42.043  6117  6135 D ANIMATION_TEST: [1] Scroll progress: 8s / 30s
+10-19 14:53:53.469  6117  6135 D ANIMATION_TEST: [1] Scroll progress: 20s / 30s
+10-19 14:54:02.157  6117  6135 D ANIMATION_TEST: [1] Scroll progress: 29s / 30s
+10-19 14:54:03.155  6117  6135 D ANIMATION_TEST: [1] Ô£ô Scroll test completed (62 scrolls)
+10-19 14:54:03.236  6117  6135 D ANIMATION_TEST: [1] Scrolling up to find map...
+10-19 14:54:05.319  6117  6135 D ANIMATION_TEST: [1] Ô£ô Map found after 3 scrolls
+10-19 14:54:06.321  6117  6135 D ANIMATION_TEST: [1] Starting zoom test (30s)...
+10-19 14:54:12.265  6117  6135 D ANIMATION_TEST: [1] Zoom progress: 5s / 30s
+10-19 14:54:18.239  6117  6135 D ANIMATION_TEST: [1] Zoom progress: 11s / 30s
+10-19 14:54:24.281  6117  6135 D ANIMATION_TEST: [1] Zoom progress: 17s / 30s
+10-19 14:54:30.193  6117  6135 D ANIMATION_TEST: [1] Zoom progress: 23s / 30s
+10-19 14:54:36.257  6117  6135 D ANIMATION_TEST: [1] Zoom progress: 29s / 30s
+10-19 14:54:37.475  6117  6135 D ANIMATION_TEST: [1] Ô£ô Zoom test completed (52 zoom operations)
+10-19 14:54:37.620  6117  6135 D ANIMATION_TEST: 
+10-19 14:54:37.620  6117  6135 D ANIMATION_TEST: ========================================
+10-19 14:54:37.621  6117  6135 D ANIMATION_TEST: TEST COMPLETED
+10-19 14:54:37.621  6117  6135 D ANIMATION_TEST: Total Time: 1 minutes
+10-19 14:54:37.622  6117  6135 D ANIMATION_TEST: ========================================
+
+
